@@ -1,4 +1,5 @@
-# Dremio ARP Example Connector
+# Dremio ARP AWS Athena Example Connector
+
 
 ## Overview
 
@@ -15,7 +16,9 @@ connection to the JDBC driver.
 
 The ARP YAML file is what is used to modify the SQL queries that are sent to the JDBC driver, allowing you to specify 
 support for different data types and functions, as well as rewrite them if tweaks need to be made for your specific 
-data source. 
+data source. For this Example , SNOWFLAKE DREMIO Connector YAML is cloned with one change as AWS ATHENA doesn't support OFFSET as of now.
+
+dremio snowflake connector is here https://github.com/narendrans/dremio-snowflake, without this work , i wouldn't able to cook up ATHENA this easily. It literally took 1/2 day to code and test for a day.
 
 ## ARP File Format
 
@@ -45,13 +48,23 @@ The ARP file is broken down into several sections:
 
 If an operation or function is not specified in the ARP file, then Dremio will handle the operation itself. Any operations which are indicated as supported but need to be stacked on operations which are not will not be pushed down to the SQL query.
 
-## SQLite example
-The SQLite example provided here shows and example ARP YAML file for SQLite and the associated files require to build a connector
-from the template. 
-
 ## Building and Installation
 
 1. In root directory with the pom.xml file run `mvn clean install`
 2. Take the resulting .jar file in the target folder and put it in the \dremio\jars folder in Dremio
-3. Take the SQLite JDBC driver from (https://bitbucket.org/xerial/sqlite-jdbc/downloads/) and put in in the \dremio\jars\3rdparty folder
+3. Take the AWS Athena JDBC driver from (https://s3.amazonaws.com/athena-downloads/drivers/JDBC/SimbaAthenaJDBC_2.0.7/AthenaJDBC42_2.0.7.jar) and put in in the \dremio\jars\3rdparty folder
+4. Make sure AWS Credentials are available eitehr in ENVIRONMENT VARIABLES, Profile file ( ~/.aws/credentails) or the Sever has AWSInstanceMetadata Service enabled
+
+## Usage
+1. Select Source and Select AWS Athena ( should appear first)
+3. Give a Name, Make sure your enter the Region ( e.g;- ap-southeast-2, us-west-2 etc), Leave AWSCredentialProdiver as DefaultChain ( Unless you want to change and know how the various credential provider works) and S3 Path (S3://<bucketname>/<path>) where the crendentials has full write acess ( AWS Athena works by first committing the result set in S3 Path and then to the JDBC / Dremo)
 4. Restart Dremio
+
+AWS Region info ( https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+
+AWS Credential Provider - DefaultCredentialProviderChaininfo - Shows the order in which it looks for Credentials. (https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)
+
+S3 Ouput Locaion to have the S3 Path where the credentials as write access.
+
+
+
