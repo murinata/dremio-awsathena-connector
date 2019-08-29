@@ -49,7 +49,7 @@ The ARP file is broken down into several sections:
 If an operation or function is not specified in the ARP file, then Dremio will handle the operation itself. Any operations which are indicated as supported but need to be stacked on operations which are not will not be pushed down to the SQL query.
 
 ## Building and Installation
-
+*NOTE - Build in Linux system , Project built in windows might throw runtime exceptions*
 1. In root directory with the pom.xml file run `mvn clean install`
 2. Take the resulting .jar file in the target folder and put it in the \dremio\jars folder in Dremio
 3. Take the AWS Athena JDBC driver from (https://s3.amazonaws.com/athena-downloads/drivers/JDBC/SimbaAthenaJDBC_2.0.7/AthenaJDBC42_2.0.7.jar) and put in in the \dremio\jars\3rdparty folder
