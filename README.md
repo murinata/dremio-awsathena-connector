@@ -16,7 +16,9 @@ connection to the JDBC driver.
 
 The ARP YAML file is what is used to modify the SQL queries that are sent to the JDBC driver, allowing you to specify 
 support for different data types and functions, as well as rewrite them if tweaks need to be made for your specific 
-data source. For this Example , SNOWFLAKE DREMIO Connector YAML is cloned with one change as AWS ATHENA doesn't support OFFSET as of now.
+data source. For this Example , SNOWFLAKE DREMIO Connector YAML is cloned with just one change as AWS ATHENA doesn't support OFFSET as of now.
+
+*NOTE : Minimum testing has happened , not all functions are tested, feel free to branch or send me updates for YAML file*
 
 dremio snowflake connector is here https://github.com/narendrans/dremio-snowflake, without this work , i wouldn't able to cook up ATHENA this easily. It literally took 1/2 day to code and test for a day.
 
