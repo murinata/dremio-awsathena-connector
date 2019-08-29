@@ -42,11 +42,31 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
       AbstractArpConf.loadArpFile(ARP_FILENAME, (ArpDialect::new));
   private static final String DRIVER = "com.simba.athena.jdbc42.Driver";
 
- 
+  @NotBlank
+  @Tag(1)
+  @DisplayMetadata(label = "AWSRegion")
+  public String awsregion = "ap-southeast-2";
 
+  @Tag(2)
+  @DisplayMetadata(label = "AWS Credential Provider")
+  public String awscredentialProvider = "com.simba.athena.amazonaws.auth.DefaultAWSCredentialsProviderChain"; 
+
+  @NotBlank
+  @Tag(3)
+  @DisplayMetadata(label = "S3 Ouputput Location - Full S3 Path s3://...")
+  public String s3OutputLocation = "s3://temp/athena-output/";
+  
+  
   @VisibleForTesting
   public String toJdbcConnectionString() {
-    return String.format("jdbc:awsathena://AWSRegion=ap-southeast-2;AwsCredentialsProviderClass=com.simba.athena.amazonaws.auth.DefaultAWSCredentialsProviderChain;S3OutputLocation=s3://amp-edi/athenaproxy/cache/dremio");
+	if ("".equals(awscredentialProvider)) {
+		awscredentialProvider = "com.simba.athena.amazonaws.auth.DefaultAWSCredentialsProviderChain";
+	}
+	if ("".equals(s3OutputLocation)) {
+		s3OutputLocation = "s3://temp/athena-output";
+	}
+    return String.format("jdbc:awsathena://AWSRegion=%s;AwsCredentialsProviderClass=%s;S3OutputLocation=%s",
+	  awsregion,awscredentialProvider,s3OutputLocation);
   }
 
   @Override
