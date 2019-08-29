@@ -2754,3 +2754,4 @@ expressions:
       variable_signatures:
         - return: boolean
           arg_type: boolean
+
