@@ -21,9 +21,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.dremio.plugin</groupId>
-  <version>1.0.beta.20190829</version>
-  <artifactId>dremio-awsathena-plugin</artifactId>
-  <name>Dremio AWSAthena Community Connector</name>
+  <version>1.1.beta.20190905</version>
+  <artifactId>dremio-awsgenericjdbc-plugin</artifactId>
+  <name>Dremio Generic JDBC Community Connector</name>
 
   <properties>
     <version.dremio>3.2.4-201906051751050278-1bcce62</version.dremio>
