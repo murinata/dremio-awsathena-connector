@@ -1,5 +1,7 @@
 # Dremio ARP AWS Athena Example Connector
 
+## Work in Progress
+Add a Generic JDBC Connector with ARP File content as Editable in UI.
 
 ## Overview
 
