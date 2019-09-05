@@ -113,7 +113,8 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
 
   @Override
   public ArpDialect getDialect() {
-    return ARP_DIALECT;
+  //  return ARP_DIALECT;
+    return AbstractArpConf.loadArpFile(yamlPath, (ArpDialect::new));
   }
 
   @VisibleForTesting
