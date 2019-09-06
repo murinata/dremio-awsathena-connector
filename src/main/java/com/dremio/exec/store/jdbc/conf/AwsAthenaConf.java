@@ -35,7 +35,7 @@ import io.protostuff.Tag;
 /**
  * Configuration for SQLite sources.
  */
-@SourceType(value = "AWSATHENA", label = "AWS Athena")
+@SourceType(value = "AWSATHENA", label = "Generic JDBC / AWS Athena")
 public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
   private static final String ARP_FILENAME = "arp/implementation/awsathena-arp.yaml";
   private static final ArpDialect ARP_DIALECT =
@@ -76,6 +76,14 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
   @Tag(6)
   @DisplayMetadata(label = "S3 Ouputput Location - Required for Athena - Full S3 Path s3://...")
   public String s3OutputLocation = "s3://temp/athena-output/";
+
+  @Tag(9)
+  @DisplayMetadata(label ="Proxy Host")
+  public String proxyHost ="";
+
+  @Tag(10)
+  @DisplayMetadata(label ="Proxy Port")
+  public String proxyPort="";
   
   
   @VisibleForTesting
@@ -86,11 +94,17 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
 	if ("".equals(s3OutputLocation)) {
 		s3OutputLocation = "s3://temp/athena-output";
 	}
-    if (!("".equals(jdbcurl))) {
+        if ("".equals(awsregion)) {
+                awsregion="ap-southeast-2";
+        }
+    if (!("".equals(jdbcurl))) { // If jdbc url is provided juse use that and ignore everything else
        return jdbcurl;
     }
-
-    return String.format("jdbc:awsathena://AwsRegion=%s;S3OutputLocation=%s",
+    if ( !("".equals(proxyHost))){ // if ProxyHost is populated, add proxyhost & proxyport to url
+       return String.format("jdbc:awsathena://AwsRegion=%s;AwsCredentialsProviderClass=%s;S3OutputLocation=%s;ProxyHost=%s;ProxyPort=%s",
+              awsregion,awscredentialProvider,s3OutputLocation,proxyHost,proxyPort);   
+    }
+    return String.format("jdbc:awsathena://AwsRegion=%s;AwsCredentialsProviderClass=%s;S3OutputLocation=%s",
 	  awsregion,awscredentialProvider,s3OutputLocation);
   }
 
