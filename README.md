@@ -1,7 +1,10 @@
 # Dremio ARP AWS Athena Example Connector
 
-## Work in Progress
-Add a Generic JDBC Connector with ARP File content as Editable in UI.
+## NEW UPDATE - 05-SEP-2019
+Add a Generic JDBC Connector .
+Specify JDBC URL 
+Specify where the ARP-YAML file is (relative to classpath) - You need to define your own YAML file and put it in classpath and provide the relative URL here.
+Tested with Athena JDBC Driver and URL and it works. 
 
 ## Overview
 
