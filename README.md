@@ -1,5 +1,13 @@
 # Dremio ARP AWS Athena Example Connector
 
+## NEW UPDATE - 04-OCT-2019
+Added QueryResultStreaming config as the default is set to 1 by AWS JDBC Driver which creates issues when you are behind corporate firewall which blocks the port used for QueryResultStreaming
+
+The new jar file is under target folder
+
+## NOTE : Added Gandiva DLL for Windows
+Applicable for only for Dremio 3.3.2. From Dremio 4.0 onwards, Dremio has stopped supporting any build on Windows OS.
+
 ## NEW UPDATE - 05-SEP-2019
 Add a Generic JDBC Connector .
 Specify JDBC URL 
