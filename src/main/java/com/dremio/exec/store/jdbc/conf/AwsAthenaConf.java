@@ -87,7 +87,7 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
   
   @Tag(11)
   @DisplayMetadata(label="Resultset Streaming. Hint : Set to 0 if behind proxy")
-  public int  UseResultsetStreaming  = 0;
+  public String  UseResultsetStreaming  = "0";
   
   @VisibleForTesting
   public String toJdbcConnectionString() {
