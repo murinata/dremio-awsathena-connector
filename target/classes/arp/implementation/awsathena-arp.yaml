@@ -300,9 +300,6 @@ expressions:
           return: "boolean"
         - args:
            - "varchar"
-          return : "integer"
-        - args:
-           - "varchar"
           return: "date"
 
     - names:
