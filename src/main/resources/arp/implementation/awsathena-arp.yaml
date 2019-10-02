@@ -300,7 +300,7 @@ expressions:
           return: "boolean"
         - args:
            - "varchar"
-          return : "int"
+          return : "integer"
         - args:
            - "varchar"
           return: "tinyint"
