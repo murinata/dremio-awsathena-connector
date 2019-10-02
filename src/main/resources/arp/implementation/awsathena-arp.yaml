@@ -303,12 +303,6 @@ expressions:
           return : "integer"
         - args:
            - "varchar"
-          return: "tinyint"
-        - args:
-           - "varchar"
-          return: "smallint"
-        - args:
-           - "varchar"
           return: "date"
 
     - names:
