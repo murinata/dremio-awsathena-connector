@@ -85,6 +85,9 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
   @DisplayMetadata(label ="Proxy Port")
   public String proxyPort="";
   
+  @Tag(11)
+  @DisplayMetadata(label="Resultset Streaming. Hint : Set to 0 if behind proxy")
+  public int  UseResultsetStreaming  = 0;
   
   @VisibleForTesting
   public String toJdbcConnectionString() {
@@ -101,11 +104,11 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
        return jdbcurl;
     }
     if ( !("".equals(proxyHost))){ // if ProxyHost is populated, add proxyhost & proxyport to url
-       return String.format("jdbc:awsathena://AwsRegion=%s;AwsCredentialsProviderClass=%s;S3OutputLocation=%s;ProxyHost=%s;ProxyPort=%s",
-              awsregion,awscredentialProvider,s3OutputLocation,proxyHost,proxyPort);   
+       return String.format("jdbc:awsathena://AwsRegion=%s;AwsCredentialsProviderClass=%s;S3OutputLocation=%s;ProxyHost=%s;ProxyPort=%s;UseResultsetStreaming=%s",
+              awsregion,awscredentialProvider,s3OutputLocation,proxyHost,proxyPort, UseResultsetStreaming);   
     }
-    return String.format("jdbc:awsathena://AwsRegion=%s;AwsCredentialsProviderClass=%s;S3OutputLocation=%s",
-	  awsregion,awscredentialProvider,s3OutputLocation);
+    return String.format("jdbc:awsathena://AwsRegion=%s;AwsCredentialsProviderClass=%s;S3OutputLocation=%s;UseResultsetStreaming=%s",
+	  awsregion,awscredentialProvider,s3OutputLocation,UseResultsetStreaming);
   }
 
   @Override
