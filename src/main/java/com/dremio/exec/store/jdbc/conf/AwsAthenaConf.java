@@ -66,27 +66,27 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
   public String DRIVER = "com.simba.athena.jdbc42.Driver";
 
   @Tag(4)
-  @DisplayMetadata(label = "AWSRegion - Used for AWS Services")
+  @DisplayMetadata(label = "AWSRegion - Used for AWS Services *")
   public String awsregion = "ap-southeast-2";
 
   @Tag(5)
-  @DisplayMetadata(label = "AWS Credential Provider - Default Athena Default Credential Provider")
+  @DisplayMetadata(label = "AWS Credential Provider - Default Athena Default Credential Provider *")
   public String awscredentialProvider = "com.simba.athena.amazonaws.auth.DefaultAWSCredentialsProviderChain"; 
 
   @Tag(6)
-  @DisplayMetadata(label = "S3 Ouputput Location - Required for Athena - Full S3 Path s3://...")
+  @DisplayMetadata(label = "S3 Ouput Location - Required for Athena - Full S3 Path s3://... *")
   public String s3OutputLocation = "s3://temp/athena-output/";
 
   @Tag(9)
-  @DisplayMetadata(label ="Proxy Host")
+  @DisplayMetadata(label ="Proxy Host *")
   public String proxyHost ="";
 
   @Tag(10)
-  @DisplayMetadata(label ="Proxy Port")
+  @DisplayMetadata(label ="Proxy Port *")
   public String proxyPort="";
   
   @Tag(11)
-  @DisplayMetadata(label="Resultset Streaming. Hint : Set to 0 if behind proxy")
+  @DisplayMetadata(label="Resultset Streaming. Hint : Set to 0 if behind proxy *")
   public String  UseResultsetStreaming  = "0";
   
   @VisibleForTesting
@@ -125,7 +125,7 @@ public class AwsAthenaConf extends AbstractArpConf<AwsAthenaConf> {
 
   private CloseableDataSource newDataSource() {
     return DataSources.newGenericConnectionPoolDataSource(DRIVER,
-      toJdbcConnectionString(), ("".equals(username))?null:password, ("".equals(password))?null:password, null, DataSources.CommitMode.DRIVER_SPECIFIED_COMMIT_MODE);
+      toJdbcConnectionString(), ("".equals(username))?null:username, ("".equals(password))?null:password, null, DataSources.CommitMode.DRIVER_SPECIFIED_COMMIT_MODE);
   }
 
   @Override
